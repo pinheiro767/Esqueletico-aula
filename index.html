@@ -456,36 +456,36 @@ let current = 1;
 
 // Anatomical topics per slide
 const slideData = [
-  { title: "Introdução ao Sistema Esquelético", desc: "Visão geral da estrutura óssea humana e suas principais funções no organismo." },
-  { title: "Funções do Esqueleto", desc: "Suporte, proteção, movimento, hematopoiese e armazenamento mineral." },
-  { title: "Classificação dos Ossos", desc: "Longos, curtos, planos, irregulares e sesamoides — morfologia e exemplos." },
-  { title: "Estrutura do Osso Longo", desc: "Diáfise, epífises, metáfise, periósteo, endósteo e canal medular." },
-  { title: "Tecido Ósseo Compacto", desc: "Osteons, canais de Havers, lamelas e canalículos ósseos." },
-  { title: "Tecido Ósseo Esponjoso", desc: "Trabéculas, espaços medulares e distribuição de forças mecânicas." },
-  { title: "Células Ósseas", desc: "Osteoblastos, osteócitos, osteoclastos e células osteoprogenitoras." },
-  { title: "Ossificação Intramembranosa", desc: "Formação de osso a partir de tecido conjuntivo mesenquimal." },
-  { title: "Ossificação Endocondral", desc: "Formação de osso a partir de modelo de cartilagem hialina." },
-  { title: "Crescimento Ósseo", desc: "Placas de crescimento (epifisárias), crescimento em comprimento e espessura." },
-  { title: "Crânio — Visão Geral", desc: "Ossos do neurocrânio e viscerocranio, suturas e fontanelas." },
-  { title: "Coluna Vertebral", desc: "Vértebras cervicais, torácicas, lombares, sacro e cóccix." },
-  { title: "Caixa Torácica", desc: "Esterno, costelas verdadeiras, falsas e flutuantes." },
-  { title: "Cintura Escapular", desc: "Clavícula e escápula — articulações e relevância funcional." },
-  { title: "Esqueleto do Membro Superior", desc: "Úmero, rádio, ulna, carpo, metacarpo e falanges." },
-  { title: "Cintura Pélvica", desc: "Ilíaco (ílio, ísquio e púbis), articulação sacroilíaca e sínfise púbica." },
-  { title: "Esqueleto do Membro Inferior", desc: "Fêmur, patela, tíbia, fíbula, tarso, metatarso e falanges." },
-  { title: "Articulações — Conceitos", desc: "Sinartroses, anfiartroses e diartroses — classificação geral." },
-  { title: "Articulações Sinoviais", desc: "Cápsula articular, membrana sinovial, líquido sinovial e cartilagem." },
-  { title: "Tipos de Articulações Sinoviais", desc: "Planas, dobradiça, pivô, condilóide, selar e esferóide." },
-  { title: "Movimentos Articulares", desc: "Flexão, extensão, abdução, adução, rotação e circundução." },
-  { title: "Articulação do Joelho", desc: "Meniscos, ligamentos cruzados, ligamentos colaterais e patela." },
-  { title: "Articulação do Quadril", desc: "Acetábulo, cabeça femoral, labro acetabular e ligamentos." },
-  { title: "Articulação do Ombro", desc: "Glenoumeral, manguito rotador e estabilizadores dinâmicos." },
-  { title: "Remodelação Óssea", desc: "Ciclo de remodelação, fatores regulatórios e piezoeletricidade." },
-  { title: "Distúrbios Ósseos", desc: "Osteoporose, osteomalácia, doença de Paget e osteogênese imperfeita." },
-  { title: "Fraturas", desc: "Classificação, cicatrização em 4 fases e consolidação óssea." },
-  { title: "Desenvolvimento Embrionário", desc: "Condrogênese, osteogênese e cronologia do desenvolvimento esquelético." },
-  { title: "Variações Anatômicas", desc: "Ossos supranumerários, fusões e variações clinicamente relevantes." },
-  { title: "Revisão e Correlações Clínicas", desc: "Síntese dos conteúdos e aplicação clínica do sistema esquelético." },
+  { desc: "Visão geral da estrutura óssea humana e suas principais funções no organismo." },
+  { desc: "Suporte, proteção, movimento, hematopoiese e armazenamento mineral." },
+  { desc: "Longos, curtos, planos, irregulares e sesamoides — morfologia e exemplos." },
+  { desc: "Diáfise, epífises, metáfise, periósteo, endósteo e canal medular." },
+  { desc: "Osteons, canais de Havers, lamelas e canalículos ósseos." },
+  { desc: "Trabéculas, espaços medulares e distribuição de forças mecânicas." },
+  { desc: "Osteoblastos, osteócitos, osteoclastos e células osteoprogenitoras." },
+  { desc: "Formação de osso a partir de tecido conjuntivo mesenquimal." },
+  { desc: "Formação de osso a partir de modelo de cartilagem hialina." },
+  { desc: "Placas de crescimento (epifisárias), crescimento em comprimento e espessura." },
+  { desc: "Ossos do neurocrânio e viscerocranio, suturas e fontanelas." },
+  { desc: "Vértebras cervicais, torácicas, lombares, sacro e cóccix." },
+  { desc: "Esterno, costelas verdadeiras, falsas e flutuantes." },
+  { desc: "Clavícula e escápula — articulações e relevância funcional." },
+  { desc: "Úmero, rádio, ulna, carpo, metacarpo e falanges." },
+  { desc: "Ilíaco (ílio, ísquio e púbis), articulação sacroilíaca e sínfise púbica." },
+  { desc: "Fêmur, patela, tíbia, fíbula, tarso, metatarso e falanges." },
+  { desc: "Sinartroses, anfiartroses e diartroses — classificação geral." },
+  { desc: "Cápsula articular, membrana sinovial, líquido sinovial e cartilagem." },
+  { desc: "Planas, dobradiça, pivô, condilóide, selar e esferóide." },
+  { desc: "Flexão, extensão, abdução, adução, rotação e circundução." },
+  { desc: "Meniscos, ligamentos cruzados, ligamentos colaterais e patela." },
+  { desc: "Acetábulo, cabeça femoral, labro acetabular e ligamentos." },
+  { desc: "Glenoumeral, manguito rotador e estabilizadores dinâmicos." },
+  { desc: "Ciclo de remodelação, fatores regulatórios e piezoeletricidade." },
+  { desc: "Osteoporose, osteomalácia, doença de Paget e osteogênese imperfeita." },
+  { desc: "Classificação, cicatrização em 4 fases e consolidação óssea." },
+  { desc: "Condrogênese, osteogênese e cronologia do desenvolvimento esquelético." },
+  { desc: "Ossos supranumerários, fusões e variações clinicamente relevantes." },
+  { desc: "Síntese dos conteúdos e aplicação clínica do sistema esquelético." },
 ];
 
 // ─── GET IMAGE PATH ──────────────────────────────────────────
@@ -508,7 +508,7 @@ function buildSlides() {
     card.innerHTML = `
       <div class="slide-number">Slide ${String(i).padStart(2,'0')} / ${TOTAL}</div>
       <div class="slide-image-wrap" onclick="openModal(${i})" role="button" aria-label="Ampliar ilustração do slide ${i}" tabindex="0">
-        <img src="${imgPath}" alt="${data.title}" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Ilustração indisponível';" style="max-width:100%; max-height:200px; border-radius:8px;">
+        <img src="${imgPath}" alt="Slide ${i}" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Ilustração indisponível';" style="max-width:100%; max-height:200px; border-radius:8px;">
         <span class="zoom-hint">
           <i data-lucide="zoom-in" style="width:10px;height:10px;"></i>
           ampliar
@@ -526,7 +526,7 @@ function buildSlides() {
     thumb.setAttribute('role', 'listitem');
     thumb.setAttribute('tabindex', '0');
     thumb.setAttribute('aria-label', `Ir para slide ${i}`);
-    thumb.innerHTML = `<span class="thumb-dot"></span><span>${i}. ${data.title.substring(0,26)}${data.title.length > 26 ? '…' : ''}</span>`;
+    thumb.innerHTML = `<span class="thumb-dot"></span><span>${i}</span>`;
     thumb.onclick = () => { save(); goTo(i); };
     thumb.onkeydown = (e) => { if (e.key === 'Enter') { save(); goTo(i); } };
     thumbScroll.appendChild(thumb);
@@ -608,7 +608,7 @@ function openModal(slideIdx) {
   // Create img element for modal
   const img = document.createElement('img');
   img.src = imgPath;
-  img.alt = slideData[slideIdx - 1].title;
+  img.alt = `Slide ${slideIdx}`;
   img.className = 'modal-content';
   img.style.maxWidth = '80vw';
   img.style.maxHeight = '80vh';
@@ -668,7 +668,6 @@ function exportPDF() {
     const note = localStorage.getItem(`note-${i}`) || '';
     html += `<div class="page">
       <div class="num">SLIDE ${String(i).padStart(2,'0')} / ${TOTAL}</div>
-      <h2>${d.title}</h2>
       <p>${d.desc}</p>
       ${note ? `<div class="note"><div class="note-label">ANOTAÇÕES</div>${note}</div>` : ''}
     </div>`;
@@ -746,5 +745,5 @@ window.elementSdk && window.elementSdk.init({
   ]),
 });
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e46eb78e7fa02fc',t:'MTc3NDg3MTY2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-  </html>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e470ba877f602fc',t:'MTc3NDg3Mjk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
