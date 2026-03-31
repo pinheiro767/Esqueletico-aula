@@ -167,7 +167,7 @@
       border-radius: 10px;
       padding: 20px;
       min-height: 160px;
-      cursor: pointer;
+      cursor: zoom-in;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
@@ -563,12 +563,48 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* MODAL DE AMPLIAÇÃO */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-overlay.open { 
+      display: flex; 
+      animation: fadeInModal 0.3s ease; 
+    }
+
+    .modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      border: 1px solid rgba(139,92,246,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body>
-  <div class="app-root" id="appRoot"><header class="site-header">
+  <div class="app-root" id="appRoot">
+   
+   <div class="modal-overlay" id="imageModal" aria-modal="true" role="dialog"></div>
+
+   <header class="site-header">
     <div>
      <div class="header-title" id="headerTitle">
       Sistema Esquelético
@@ -1250,18 +1286,16 @@
    </main>
   </div>
   <script>
-  const TOTAL = 27; // Ajustado para fechar perfeitamente com as imagens e textos criados
+  const TOTAL = 27; 
   let current = 1;
   let isListening = false;
   let isSpeaking = false;
   let allNotes = [];
   const synth = window.speechSynthesis;
   
-  // Melhoria na compatibilidade de voz para abranger mais navegadores
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = SpeechRec ? new SpeechRec() : null;
 
-  // Initialize Data SDK for notes persistence
   let currentRecordCount = 0;
 
   const dataHandler = {
@@ -1277,7 +1311,6 @@
       const result = await window.dataSdk.init(dataHandler);
       if (!result.isOk) console.error('Failed to init Data SDK');
     } else {
-      // Plano B: Se o SDK falhar, ele salva no navegador do aluno
       const local = localStorage.getItem('anatomy_notes');
       if (local) {
         allNotes = JSON.parse(local);
@@ -1353,7 +1386,6 @@
     stopSpeech();
     const slideTitle = document.getElementById(`slide${current}Title`)?.textContent || '';
     
-    // Captura o texto do slide, retirando formatações visuais desnecessárias
     const slideCard = document.getElementById(`slide-${current}`);
     const bulletList = slideCard.querySelector('.bullet-list');
     let contentToRead = slideCard.querySelector('p')?.textContent || '';
@@ -1423,7 +1455,6 @@
         showToast('Erro ao salvar anotação');
       }
     } else {
-      // Plano B
       note.__backendId = Date.now().toString();
       allNotes.push(note);
       localStorage.setItem('anatomy_notes', JSON.stringify(allNotes));
@@ -1470,7 +1501,6 @@
           const result = await window.dataSdk.delete(note);
           if (result.isOk) showToast('Anotação removida');
         } else {
-          // Plano B
           allNotes = allNotes.filter(n => n.__backendId !== note.__backendId);
           localStorage.setItem('anatomy_notes', JSON.stringify(allNotes));
           renderNotesList();
@@ -1512,6 +1542,34 @@
     setTimeout(() => toast.remove(), 3000);
   }
 
+  // --- FUNÇÕES DO MODAL DE AMPLIAÇÃO ---
+  function openModal(imageSrc, slideNum) {
+    const modal = document.getElementById('imageModal');
+    modal.innerHTML = `<img src="${imageSrc}" alt="Slide ${slideNum} Ampliado" class="modal-content">`;
+    modal.classList.add('open');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('open');
+    modal.innerHTML = '';
+  }
+
+  function setupImageZooming() {
+    document.querySelectorAll('.slide-image-wrap').forEach((wrap, index) => {
+      wrap.addEventListener('click', () => {
+        const img = wrap.querySelector('img');
+        if (img && img.src) {
+          openModal(img.src, index + 1);
+        }
+      });
+    });
+
+    document.getElementById('imageModal').addEventListener('click', closeModal);
+  }
+
+  // --- FIM MODAL ---
+
   function goToSlide(n) {
     if (n < 1 || n > TOTAL) return;
     stopSpeech();
@@ -1530,7 +1588,6 @@
     document.getElementById('prevBtnLarge').disabled = current === 1;
     document.getElementById('nextBtnLarge').disabled = current === TOTAL;
     
-    // Rolagem automática da barra lateral para acompanhar o slide ativo
     const thumbEl = document.getElementById('thumb-' + current);
     thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     
@@ -1559,7 +1616,9 @@
   });
 
   document.addEventListener('keydown', e => {
-    // Ignora atalhos de navegação se o usuário estiver digitando anotações
+    // Fechar modal com o ESC
+    if (e.key === 'Escape') closeModal();
+
     if(e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToSlide(current + 1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goToSlide(current - 1);
@@ -1598,6 +1657,7 @@
 
   // Initialize on load
   initDataSDK();
+  setupImageZooming(); // Inicializa o sistema de zoom
   lucide.createIcons();
   </script>
  </body>
