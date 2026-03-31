@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,869 +7,1598 @@
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body, .app-root {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
+    html, body, .app-root {
+      height: 100%;
+      width: 100%;
+    }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #0a0c10;
-    color: #e2e8f0;
-  }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0d1b2a 100%);
+      color: #e2e8f0;
+      overflow: hidden;
+    }
 
-  .app-root {
-    display: flex;
-    flex-direction: column;
-    background: radial-gradient(ellipse at 20% 0%, rgba(56,189,248,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 100%, rgba(99,102,241,0.07) 0%, transparent 60%),
-                #0a0c10;
-  }
+    .app-root {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0d1b2a 100%),
+                  radial-gradient(circle at 20% 30%, rgba(139,92,246,0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(59,130,246,0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
 
-  /* HEADER */
-  .site-header {
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    flex-shrink: 0;
-    background: rgba(10,12,16,0.8);
-    backdrop-filter: blur(12px);
-  }
+    /* HEADER */
+    .site-header {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(139,92,246,0.15);
+      flex-shrink: 0;
+      background: rgba(15,23,42,0.7);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 12px rgba(139,92,246,0.1);
+    }
 
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #f0f6ff;
-    letter-spacing: -0.3px;
-  }
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fef3c7;
+      letter-spacing: -0.3px;
+    }
 
-  .header-subtitle {
-    font-size: 11px;
-    color: #64748b;
-    font-weight: 400;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-top: 1px;
-  }
+    .header-subtitle {
+      font-size: 11px;
+      color: #a78bfa;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
 
-  .slide-badge {
-    font-size: 12px;
-    color: #38bdf8;
-    font-weight: 600;
-    background: rgba(56,189,248,0.1);
-    border: 1px solid rgba(56,189,248,0.2);
-    padding: 4px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.4px;
-  }
+    .slide-badge {
+      font-size: 12px;
+      color: #fcd34d;
+      font-weight: 600;
+      background: linear-gradient(135deg, rgba(252,211,77,0.15), rgba(139,92,246,0.1));
+      border: 1px solid rgba(252,211,77,0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 2px 8px rgba(252,211,77,0.1);
+    }
 
-  /* MAIN LAYOUT */
-  .main-area {
-    flex: 1;
-    display: flex;
-    gap: 0;
-    overflow: hidden;
-  }
+    /* MAIN LAYOUT */
+    .main-area {
+      flex: 1;
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      min-height: 0;
+    }
 
-  /* SLIDE PANEL */
-  .slide-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 16px 16px 12px 20px;
-    gap: 12px;
-  }
+    /* SLIDE PANEL */
+    .slide-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 16px 16px 12px 20px;
+      gap: 12px;
+      min-width: 0;
+    }
 
-  .slide-viewport {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-  }
+    .slide-viewport {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      min-height: 0;
+    }
 
-  /* Each slide card */
-  .slide-card {
-    display: none;
-    height: 100%;
-    background: rgba(15,18,26,0.9);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    overflow-y: auto;
-    padding: 28px 32px;
-    animation: slideIn 0.3s ease;
-  }
+    /* Each slide card */
+    .slide-card {
+      display: none;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(30,41,59,0.6), rgba(59,130,246,0.05));
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 14px;
+      overflow-y: auto;
+      padding: 28px 32px;
+      box-shadow: 0 8px 32px rgba(139,92,246,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
 
-  .slide-card.active { display: flex; flex-direction: column; gap: 18px; }
+    .slide-card.active {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-  .slide-card::-webkit-scrollbar { width: 4px; }
-  .slide-card::-webkit-scrollbar-track { background: transparent; }
-  .slide-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .slide-card::-webkit-scrollbar { width: 4px; }
+    .slide-card::-webkit-scrollbar-track { background: transparent; }
+    .slide-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
-  /* Slide content */
-  .slide-number {
-    font-size: 11px;
-    font-weight: 600;
-    color: #38bdf8;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-  }
+    .slide-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fcd34d;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
 
-  .slide-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #f0f6ff;
-    line-height: 1.25;
-    margin-top: 2px;
-    margin-bottom: 6px;
-  }
+    .slide-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fef3c7;
+      line-height: 1.25;
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
 
-  .slide-divider {
-    height: 1px;
-    background: linear-gradient(90deg, rgba(56,189,248,0.4), transparent);
-    border: none;
-  }
+    .slide-divider {
+      height: 2px;
+      background: linear-gradient(90deg, rgba(139,92,246,0.6), rgba(252,211,77,0.3), transparent);
+      border: none;
+      flex-shrink: 0;
+    }
 
-  .slide-image-wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.02);
-    border: 1px dashed rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 20px;
-    min-height: 140px;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+    /* Image placeholder */
+    .slide-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(59,130,246,0.05));
+      border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 160px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
 
-  .slide-image-wrap:hover {
-    border-color: rgba(56,189,248,0.3);
-    background: rgba(56,189,248,0.03);
-  }
+    .slide-image-wrap:hover {
+      border-color: rgba(252,211,77,0.4);
+      background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.1));
+      box-shadow: 0 4px 16px rgba(139,92,246,0.15);
+    }
 
-  .slide-image-wrap svg.bone-svg {
-    width: 100%;
-    max-width: 200px;
-    opacity: 0.75;
-    transition: opacity 0.2s, transform 0.2s;
-  }
+    .img-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: #a78bfa;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
 
-  .slide-image-wrap:hover svg.bone-svg {
-    opacity: 1;
-    transform: scale(1.04);
-  }
+    /* Content blocks */
+    .content-block {
+      background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(59,130,246,0.04));
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(139,92,246,0.08);
+    }
 
-  .zoom-hint {
-    position: absolute;
-    bottom: 8px;
-    right: 10px;
-    font-size: 10px;
-    color: #475569;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-  }
+    .content-block-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fcd34d;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
 
-  .slide-caption {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.6;
-    text-align: center;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
+    .content-block p {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
 
-  /* NAVIGATION */
-  .nav-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-  }
+    /* Bullet list */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
 
-  .nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: #94a3b8;
-    transition: all 0.18s;
-  }
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
 
-  .nav-btn:hover:not(:disabled) {
-    background: rgba(255,255,255,0.1);
-    color: #e2e8f0;
-    border-color: rgba(255,255,255,0.2);
-  }
+    .bullet-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fcd34d, #a78bfa);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
 
-  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    /* NAVIGATION BAR */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(59,130,246,0.04));
+      border-top: 1px solid rgba(139,92,246,0.15);
+    }
 
-  .progress-track {
-    flex: 1;
-    height: 4px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 99px;
-    overflow: hidden;
-  }
+    .nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(139,92,246,0.1);
+      border: 1px solid rgba(139,92,246,0.2);
+      color: #a78bfa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #38bdf8, #818cf8);
-    border-radius: 99px;
-    transition: width 0.3s ease;
-  }
+    .nav-btn:hover:not(:disabled) {
+      background: rgba(139,92,246,0.2);
+      border-color: rgba(252,211,77,0.3);
+      color: #fcd34d;
+      box-shadow: 0 2px 8px rgba(252,211,77,0.15);
+      transform: scale(1.08);
+    }
 
-  .pdf-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    border: 1px solid rgba(99,102,241,0.4);
-    background: rgba(99,102,241,0.12);
-    color: #818cf8;
-    transition: all 0.18s;
-  }
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
 
-  .pdf-btn:hover {
-    background: rgba(99,102,241,0.22);
-    border-color: rgba(99,102,241,0.6);
-    color: #a5b4fc;
-  }
+    .nav-btn-large {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.15));
+      border: 1.5px solid rgba(139,92,246,0.35);
+      color: #fcd34d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-weight: 600;
+      font-size: 13px;
+    }
 
-  /* SIDEBAR */
-  .sidebar {
-    width: 260px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 16px 20px 16px 8px;
-    gap: 12px;
-    border-left: 1px solid rgba(255,255,255,0.05);
-    overflow: hidden;
-  }
+    .nav-btn-large:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba(252,211,77,0.15), rgba(139,92,246,0.25));
+      border-color: rgba(252,211,77,0.5);
+      color: #fef3c7;
+      box-shadow: 0 4px 16px rgba(252,211,77,0.2);
+      transform: scale(1.05);
+    }
 
-  .sidebar-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: #475569;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+    .nav-btn-large:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
 
-  .notes-area {
-    flex: 1;
-    width: 100%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px;
-    padding: 12px;
-    color: #cbd5e1;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    line-height: 1.6;
-    resize: none;
-    outline: none;
-    transition: border-color 0.2s;
-  }
+    .nav-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 0 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  .notes-area:focus {
-    border-color: rgba(56,189,248,0.3);
-  }
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(139,92,246,0.2);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-  .notes-area::placeholder { color: #334155; }
+    .nav-dot.active {
+      background: linear-gradient(135deg, #fcd34d, #a78bfa);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px rgba(252,211,77,0.4);
+    }
 
-  .notes-saved {
-    font-size: 11px;
-    color: #22c55e;
-    opacity: 0;
-    transition: opacity 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      padding: 16px 12px 12px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      border-left: 1px solid rgba(139,92,246,0.15);
+    }
 
-  .notes-saved.visible { opacity: 1; }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.2); border-radius: 3px; }
 
-  /* Slide thumbnails mini list */
-  .thumb-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    overflow-y: auto;
-    max-height: 180px;
-    padding-right: 2px;
-  }
+    .sidebar-label {
+      font-size: 10px;
+      color: #a78bfa;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 8px 8px;
+    }
 
-  .thumb-scroll::-webkit-scrollbar { width: 3px; }
-  .thumb-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+    .thumb-item {
+      border-radius: 9px;
+      border: 1px solid rgba(139,92,246,0.15);
+      background: rgba(139,92,246,0.05);
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-  .thumb-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.15s;
-    font-size: 12px;
-    color: #64748b;
-    border: 1px solid transparent;
-  }
+    .thumb-item:hover {
+      background: rgba(139,92,246,0.12);
+      border-color: rgba(139,92,246,0.25);
+    }
 
-  .thumb-item:hover { background: rgba(255,255,255,0.04); color: #94a3b8; }
-  .thumb-item.active-thumb {
-    background: rgba(56,189,248,0.08);
-    border-color: rgba(56,189,248,0.2);
-    color: #38bdf8;
-    font-weight: 500;
-  }
+    .thumb-item.active {
+      background: linear-gradient(135deg, rgba(252,211,77,0.12), rgba(139,92,246,0.12));
+      border-color: rgba(252,211,77,0.3);
+      box-shadow: 0 2px 8px rgba(139,92,246,0.12);
+    }
 
-  .thumb-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    flex-shrink: 0;
-  }
+    .thumb-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: #a78bfa;
+      min-width: 16px;
+    }
 
-  /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    cursor: zoom-out;
-    backdrop-filter: blur(6px);
-  }
+    .thumb-item.active .thumb-num { color: #fcd34d; }
 
-  .modal-overlay.open { display: flex; }
+    .thumb-text {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.3;
+      font-weight: 500;
+    }
 
-  .modal-content {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-  }
+    .thumb-item.active .thumb-text { color: #e2e8f0; }
 
-  /* Tooltip for keyboard hint */
-  .keyboard-hint {
-    font-size: 10px;
-    color: #334155;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 4px;
-  }
+    /* VOICE & NOTES CONTROLS */
+    .voice-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 12px;
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
 
-  kbd {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 3px;
-    padding: 1px 5px;
-    font-size: 10px;
-    font-family: 'DM Sans', sans-serif;
-    color: #475569;
-  }
+    .voice-btn {
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.1));
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 8px;
+      color: #a78bfa;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
 
-  .voice-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: #94a3b8;
-    transition: all 0.18s;
-  }
+    .voice-btn:hover {
+      background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(59,130,246,0.15));
+      border-color: rgba(252,211,77,0.4);
+      color: #fcd34d;
+      box-shadow: 0 2px 8px rgba(252,211,77,0.15);
+    }
 
-  .voice-btn:hover:not(:disabled) {
-    background: rgba(255,255,255,0.1);
-    color: #e2e8f0;
-    border-color: rgba(255,255,255,0.2);
-  }
+    .voice-btn.active {
+      background: linear-gradient(135deg, #fcd34d, #a78bfa);
+      color: #0f172a;
+      border-color: #fcd34d;
+    }
 
-  .voice-btn.listening {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #fca5a5;
-    animation: pulse-voice 1.5s infinite;
-  }
+    .voice-status {
+      font-size: 11px;
+      color: #a78bfa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      animation: pulse 2s infinite;
+    }
 
-  @keyframes pulse-voice {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-</style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .notes-panel {
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .notes-panel textarea {
+      width: 100%;
+      height: 100px;
+      background: rgba(15,23,42,0.5);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 8px;
+      padding: 8px;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-family: 'DM Sans', sans-serif;
+      resize: none;
+      transition: all 0.3s;
+    }
+
+    .notes-panel textarea:focus {
+      outline: none;
+      border-color: rgba(252,211,77,0.4);
+      box-shadow: 0 0 8px rgba(252,211,77,0.1);
+    }
+
+    .notes-btn-group {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .notes-btn {
+      flex: 1;
+      padding: 6px 10px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.1));
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 6px;
+      color: #a78bfa;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .notes-btn:hover {
+      background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(59,130,246,0.15));
+      border-color: rgba(252,211,77,0.4);
+      color: #fcd34d;
+    }
+
+    .notes-list {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .note-item {
+      background: rgba(59,130,246,0.08);
+      border-left: 2px solid rgba(252,211,77,0.4);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .note-item .note-delete {
+      color: #f87171;
+      cursor: pointer;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .note-item .note-delete:hover {
+      color: #ff6b6b;
+    }
+
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, rgba(252,211,77,0.9), rgba(139,92,246,0.7));
+      color: #0f172a;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(252,211,77,0.3);
+      animation: slideInUp 0.3s ease-out;
+      z-index: 1000;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body>
-  <div class="app-root"><!-- HEADER -->
-   <header class="site-header">
+  <div class="app-root" id="appRoot"><header class="site-header">
     <div>
-     <div class="header-title" id="header-title">
+     <div class="header-title" id="headerTitle">
       Sistema Esquelético
      </div>
-     <div class="header-subtitle" id="header-subtitle">
+     <div class="header-subtitle" id="headerSubtitle">
       Anatomia Humana
      </div>
     </div>
-    <div class="slide-badge" id="slide-counter">
-     Slide 1 / 30
+    <div class="slide-badge" id="slideBadge">
+     Slide 1 de 27
     </div>
-   </header><!-- MAIN -->
-   <div class="main-area"><!-- SLIDES -->
-    <div class="slide-panel">
-     <div class="slide-viewport" id="slide-viewport"><!-- slides generated by JS -->
-     </div><!-- NAV BAR -->
-     <nav class="nav-bar" aria-label="Navegação de slides"><button class="nav-btn" id="btn-prev" onclick="prev()" aria-label="Slide anterior"> <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Anterior </button>
-      <div class="progress-track" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="30">
-       <div class="progress-fill" id="progress-fill" style="width:3.33%"></div>
-      </div><button class="nav-btn" id="btn-next" onclick="next()" aria-label="Próximo slide"> Próximo <i data-lucide="arrow-right" style="width:14px;height:14px;"></i> </button> <button class="pdf-btn" onclick="exportPDF()" aria-label="Exportar PDF"> <i data-lucide="file-down" style="width:14px;height:14px;"></i> PDF </button> <button class="voice-btn" aria-label="Ativar reconhecimento de voz" aria-pressed="false"> <i data-lucide="mic" style="width:14px;height:14px;"></i> Voz </button>
+   </header><main class="main-area"><section class="slide-panel" aria-label="Slides"><div class="voice-controls"><button class="voice-btn" id="voiceCmdBtn" title="Ativar comando de voz"> <i data-lucide="mic" style="width:14px;height:14px;"></i> Comando de Voz </button> <button class="voice-btn" id="readSlideBtn" title="Ler slide em voz alta"> <i data-lucide="volume-2" style="width:14px;height:14px;"></i> Ler Slide </button> <button class="voice-btn" id="stopVoiceBtn" title="Parar leitura" style="display:none;"> <i data-lucide="square" style="width:14px;height:14px;"></i> Parar </button>
+      <div id="voiceStatus" class="voice-status" style="display:none;"><i data-lucide="radio" style="width:12px;height:12px;"></i> <span id="voiceStatusText">Ouvindo...</span>
+      </div>
+     </div><div class="notes-panel"><textarea id="notesTextarea" placeholder="Adicione suas anotações aqui..."></textarea>
+      <div class="notes-btn-group"><button class="notes-btn" id="saveNoteBtn"> <i data-lucide="save" style="width:12px;height:12px;"></i> Salvar Anotação </button> <button class="notes-btn" id="extractInfoBtn"> <i data-lucide="brain" style="width:12px;height:12px;"></i> Extrair Info </button> <button class="notes-btn" id="exportNotesBtn"> <i data-lucide="download" style="width:12px;height:12px;"></i> Exportar </button>
+      </div>
+      <div class="notes-list" id="notesList"></div>
+     </div>
+     <div class="slide-viewport" id="slideViewport"><article class="slide-card active" id="slide-1">
+       <div>
+        <div class="slide-number">
+         Slide 01
+        </div>
+        <h2 class="slide-title" id="slide1Title">Capa</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-1.png" alt="Capa" loading="lazy" style="max-width:100%; max-height:200px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Sistema Esquelético</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Sistema Esquelético
+        </div>
+        <p style="font-size:14px; font-weight:600;">Generalidades</p>
+        <p style="margin-top:10px; font-size:12px;">Prof. Cláudia Pinheiro</p>
+       </div>
+      </article><article class="slide-card" id="slide-2">
+       <div>
+        <div class="slide-number">
+         Slide 02
+        </div>
+        <h2 class="slide-title" id="slide2Title">Funções do Sistema Esquelético</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-2.png" alt="Funções" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Funções Principais</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Principais Funções
+        </div>
+        <ul class="bullet-list">
+         <li>Sustentação corporal</li>
+         <li>Proteção de órgãos vitais (cérebro, coração, pulmões)</li>
+         <li>Base mecânica para movimentos</li>
+         <li>Produção de células sanguíneas (hematopoiese)</li>
+         <li>Reserva de sais minerais (cálcio e fósforo)</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-3">
+       <div>
+        <div class="slide-number">
+         Slide 03
+        </div>
+        <h2 class="slide-title" id="slide3Title">Divisão do Esqueleto</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-3.png" alt="Divisão" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Esqueleto Axial e Apendicular</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Dois Componentes Principais
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Esqueleto Axial (80 ossos):</strong> Ossos do eixo central (crânio, coluna vertebral, costelas e esterno)</li>
+         <li><strong style="color:#cbd5e1;">Esqueleto Apendicular (126 ossos):</strong> Ossos dos membros superiores e inferiores, além das cinturas escapular e pélvica</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-4">
+       <div>
+        <div class="slide-number">
+         Slide 04
+        </div>
+        <h2 class="slide-title" id="slide4Title">Classificação Morfológica dos Ossos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-4.png" alt="Classificação" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Tipos de Ossos</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Visão Geral dos Tipos
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Longos:</strong> Fêmur, Úmero</li>
+         <li><strong style="color:#cbd5e1;">Curtos:</strong> Carpos, Tarsos</li>
+         <li><strong style="color:#cbd5e1;">Planos:</strong> Escápula, Costelas</li>
+         <li><strong style="color:#cbd5e1;">Irregulares:</strong> Vértebras, Mandíbula</li>
+         <li><strong style="color:#cbd5e1;">Sesamoides:</strong> Patela</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-5">
+       <div>
+        <div class="slide-number">
+         Slide 05
+        </div>
+        <h2 class="slide-title" id="slide5Title">Ossos Longos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-5.png" alt="Ossos Longos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Exemplo: Fêmur</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Comprimento maior que largura e espessura</li>
+         <li>Estrutura: Diáfise (corpo central) e Epífises (extremidades)</li>
+         <li>Exemplos: Fêmur, Úmero, Tíbia, Fíbula</li>
+         <li>Função: Locomoção e suporte de peso</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-6">
+       <div>
+        <div class="slide-number">
+         Slide 06
+        </div>
+        <h2 class="slide-title" id="slide6Title">Ossos Curtos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-6.png" alt="Ossos Curtos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Carpo e Tarso</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Dimensões aproximadamente equivalentes</li>
+         <li>Localização: Áreas de pouco movimento mas grande resistência</li>
+         <li>Exemplos: Ossos do Carpo (pulso), Tarso (tornozelo)</li>
+         <li>Função: Estabilidade e absorção de impacto</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-7">
+       <div>
+        <div class="slide-number">
+         Slide 07
+        </div>
+        <h2 class="slide-title" id="slide7Title">Ossos Planos ou Laminares</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-7.png" alt="Ossos Planos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Exemplos: Escápula, Esterno</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Comprimento e largura predominam sobre a espessura</li>
+         <li>Oferecem proteção e grande área para inserção muscular</li>
+         <li>Exemplos: Escápula, ossos do topo do crânio, costelas</li>
+         <li>Função: Proteção de órgãos internos e ancoragem muscular</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-8">
+       <div>
+        <div class="slide-number">
+         Slide 08
+        </div>
+        <h2 class="slide-title" id="slide8Title">Ossos Irregulares</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-8.png" alt="Ossos Irregulares" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Vértebras e Ossos da Face</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Formas complexas que não se encaixam em outras categorias</li>
+         <li>Exemplos: Vértebras, ossos da face, mandíbula</li>
+         <li>Características: Morfologia variável e funções múltiplas</li>
+         <li>Funções: Suporte, proteção, passagem de estruturas</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-9">
+       <div>
+        <div class="slide-number">
+         Slide 09
+        </div>
+        <h2 class="slide-title" id="slide9Title">Ossos Sesamoides</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-9.png" alt="Ossos Sesamoides" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Patela (Rótula)</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Desenvolvem-se dentro de tendões</li>
+         <li>Principal exemplo: Patela (joelho)</li>
+         <li>Forma arredondada, envolvidos em tendões</li>
+         <li>Aumentam a alavanca mecânica. Outros exemplos: Sesamoides do pé</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-10">
+       <div>
+        <div class="slide-number">
+         Slide 10
+        </div>
+        <h2 class="slide-title" id="slide10Title">Substância Óssea: Osso Compacto</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-10.png" alt="Osso Compacto" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Estrutura Microscópica</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Camada externa dura do osso</li>
+         <li>Aparência sólida e densa, resistência mecânica elevada</li>
+         <li>Composta por osteons (unidades estruturais)</li>
+         <li>Localização: Camada superficial de todos os ossos</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-11">
+       <div>
+        <div class="slide-number">
+         Slide 11
+        </div>
+        <h2 class="slide-title" id="slide11Title">Substância Óssea: Osso Esponjoso</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-11.png" alt="Osso Esponjoso" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Rede de Trabéculas</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li>Rede interna de trabéculas ósseas</li>
+         <li>Estrutura porosa e reticulada, espaços preenchidos por medula óssea</li>
+         <li>Distribuição de força ao longo do osso</li>
+         <li>Localização: Núcleo de ossos longos e ossos curtos/planos. Função: Leveza com resistência</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-12">
+       <div>
+        <div class="slide-number">
+         Slide 12
+        </div>
+        <h2 class="slide-title" id="slide12Title">Periósteo e Pericôndrio</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-12.png" alt="Periósteo" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Revestimento Ósseo</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Definições
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Periósteo:</strong> Membrana de tecido conjuntivo que reveste o osso. Ausente nas superfícies articulares.</li>
+         <li><strong style="color:#cbd5e1;">Fundamental para:</strong> Nutrição, reparação e crescimento ósseo</li>
+         <li><strong style="color:#cbd5e1;">Pericôndrio:</strong> Revestimento de tecido conjuntivo da cartilagem</li>
+         <li><strong style="color:#cbd5e1;">Função:</strong> Fornece nutrição ao tecido cartilaginoso</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-13">
+       <div>
+        <div class="slide-number">
+         Slide 13
+        </div>
+        <h2 class="slide-title" id="slide13Title">Matriz Orgânica Óssea</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-13.png" alt="Matriz Óssea" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Composição da Matriz</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Composição e Funções
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Composição:</strong> 90% fibras de colágeno tipo I, proteoglicanos e glicoproteínas</li>
+         <li><strong style="color:#cbd5e1;">Funções:</strong> Resistência e flexibilidade, ancoragem de minerais</li>
+         <li><strong style="color:#cbd5e1;">Minerais depositados:</strong> Cálcio e fósforo (hidroxiapatita)</li>
+         <li><strong style="color:#cbd5e1;">Efeito:</strong> Conferem rigidez e resistência à compressão</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-14">
+       <div>
+        <div class="slide-number">
+         Slide 14
+        </div>
+        <h2 class="slide-title" id="slide14Title">Células Ósseas: Osteoblastos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-14.png" alt="Osteoblastos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Células Formadoras</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características e Funções
+        </div>
+        <ul class="bullet-list">
+         <li>Células formadoras de osso</li>
+         <li>Sintetizam a matriz orgânica (colágeno)</li>
+         <li>Secretam substâncias que promovem mineralização</li>
+         <li>Presentes na superfície óssea durante formação. Podem se diferenciar em osteócitos</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-15">
+       <div>
+        <div class="slide-number">
+         Slide 15
+        </div>
+        <h2 class="slide-title" id="slide15Title">Células Ósseas: Osteócitos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-15.png" alt="Osteócitos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Osteócitos em Lacunas</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características e Funções
+        </div>
+        <ul class="bullet-list">
+         <li>Osteoblastos aprisionados na matriz</li>
+         <li>Mantêm a vitalidade do tecido ósseo</li>
+         <li>Residem em pequenas lacunas (espaços vazios)</li>
+         <li>Comunicam-se através de canalículos. Participam na homeostase mineral</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-16">
+       <div>
+        <div class="slide-number">
+         Slide 16
+        </div>
+        <h2 class="slide-title" id="slide16Title">Células Ósseas: Osteoclastos</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-16.png" alt="Osteoclastos" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Células Reabsortivas</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características e Funções
+        </div>
+        <ul class="bullet-list">
+         <li>Células reabsortivas (fagocitárias)</li>
+         <li>Removem osso antigo e danificado</li>
+         <li>Derivadas de células hematopoiéticas</li>
+         <li>Essenciais para remodelação óssea. Atuam em "lacunas de reabsorção"</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-17">
+       <div>
+        <div class="slide-number">
+         Slide 17
+        </div>
+        <h2 class="slide-title" id="slide17Title">Origem Embrionária</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-17.png" alt="Origem Embrionária" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Desenvolvimento Embrionário</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Origem e Tipos de Ossificação
+        </div>
+        <ul class="bullet-list">
+         <li>Todo o sistema esquelético deriva do <strong style="color:#cbd5e1;">mesênquima</strong></li>
+         <li><strong style="color:#cbd5e1;">Mesênquima:</strong> Tecido conjuntivo embrionário</li>
+         <li><strong style="color:#cbd5e1;">Fonte:</strong> Células precursoras de osso e cartilagem</li>
+         <li><strong style="color:#cbd5e1;">Dois principais tipos de ossificação:</strong> Intramembranosa e Endocondral</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-18">
+       <div>
+        <div class="slide-number">
+         Slide 18
+        </div>
+        <h2 class="slide-title" id="slide18Title">Ossificação Intramembranosa - Fase 1</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-18.png" alt="Ossificação Intramembranosa Fase 1" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Centro de Ossificação</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Processo de Formação
+        </div>
+        <ul class="bullet-list">
+         <li>Ocorre dentro de membranas de tecido conjuntivo</li>
+         <li>Típica dos: Ossos do crânio, mandíbula</li>
+         <li><strong style="color:#cbd5e1;">Fase 1 - Centro de Ossificação:</strong></li>
+         <li>Células mesenquimais se diferenciam em osteoblastos</li>
+         <li>Começam a secretar o osteoide (pré-osso). Formação de ilhas de osso</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-19">
+       <div>
+        <div class="slide-number">
+         Slide 19
+        </div>
+        <h2 class="slide-title" id="slide19Title">Ossificação Intramembranosa - Fase 2</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-19.png" alt="Ossificação Intramembranosa Fase 2" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Calcificação</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Processo de Calcificação
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Fase 2 - Calcificação:</strong></li>
+         <li>Deposição de cálcio e sais minerais no osteoide</li>
+         <li>Osteoblastos tornam-se osteócitos ao serem aprisionados</li>
+         <li>Formação de matriz mineralizada. Endurecimento progressivo do tecido</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-20">
+       <div>
+        <div class="slide-number">
+         Slide 20
+        </div>
+        <h2 class="slide-title" id="slide20Title">Ossificação Intramembranosa - Fases 3 e 4</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-20.png" alt="Ossificação Intramembranosa Fases 3-4" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Desenvolvimento Final</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Fases Finais
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Fase 3 - Formação de Trabéculas:</strong> Matriz se organiza em trabéculas. Forma-se osso esponjoso</li>
+         <li><strong style="color:#cbd5e1;">Vasos:</strong> Vasos sanguíneos penetram o tecido. Primeira hematopoiese</li>
+         <li><strong style="color:#cbd5e1;">Fase 4 - Desenvolvimento do Periósteo:</strong> Mesênquima periférico condensa-se. Forma-se o periósteo. Fina camada de osso compacto</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-21">
+       <div>
+        <div class="slide-number">
+         Slide 21
+        </div>
+        <h2 class="slide-title" id="slide21Title">Ossificação Endocondral</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-21.png" alt="Ossificação Endocondral" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Substituição de Cartilagem</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Processo
+        </div>
+        <ul class="bullet-list">
+         <li>O osso substitui um modelo prévio de cartilagem hialina</li>
+         <li>Processo de crescimento da maioria dos ossos do corpo</li>
+         <li><strong style="color:#cbd5e1;">Fases principais:</strong> Formação do molde de cartilagem, hipertrofia de condrócitos</li>
+         <li>Calcificação da cartilagem, invasão de vasos e células ósseas, deposição de osso</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-22">
+       <div>
+        <div class="slide-number">
+         Slide 22
+        </div>
+        <h2 class="slide-title" id="slide22Title">Fratura: Ossificação e Reparação</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-22.png" alt="Reparação de Fratura" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Processo de Cura</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Fases de Reparação
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">1. Hematoma:</strong> Coágulo de sangue na área</li>
+         <li><strong style="color:#cbd5e1;">2. Calo Fibrocartilaginoso:</strong> Tecido conectivo e cartilagem</li>
+         <li><strong style="color:#cbd5e1;">3. Calo Ósseo:</strong> Deposição de osso novo</li>
+         <li><strong style="color:#cbd5e1;">4. Remodelação Final:</strong> Reabsorção e remodelação do osso</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-23">
+       <div>
+        <div class="slide-number">
+         Slide 23
+        </div>
+        <h2 class="slide-title" id="slide23Title">Osteoporose: Patologia Óssea</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-23.png" alt="Osteoporose" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Comparação Óssea</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Mecanismo e Consequências
+        </div>
+        <ul class="bullet-list">
+         <li>Reabsorção maior que a formação (osteoclastos &gt; osteoblastos)</li>
+         <li>Trabéculas ficam finas e fragmentadas</li>
+         <li>Osso compacto diminui em espessura</li>
+         <li><strong style="color:#cbd5e1;">Resultado:</strong> Osso quebradiço e frágil. Maior risco de fraturas. Afeta principalmente mulheres pós-menopausa</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-24">
+       <div>
+        <div class="slide-number">
+         Slide 24
+        </div>
+        <h2 class="slide-title" id="slide24Title">Visão Geral da Coluna Vertebral: Segmentos e Vistas</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-24.png" alt="Coluna Vertebral" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Segmentos e Vistas Anatômicas</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Contagem de Vértebras
+        </div>
+        <ul class="bullet-list">
+         <li><span style="color:#38bdf8;">■</span> Cervicais: 7 (C I - C VII)</li>
+         <li><span style="color:#f59e0b;">■</span> Torácicas: 12 (T I - T XII)</li>
+         <li><span style="color:#10b981;">■</span> Lombares: 5 (L I - L V)</li>
+         <li><span style="color:#a78bfa;">■</span> Sacro: 5 fusionadas (S I - S V)</li>
+         <li><span style="color:#fbbf24;">■</span> Cóccix: 4 fusionadas (Co I - Co IV)</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-25">
+       <div>
+        <div class="slide-number">
+         Slide 25
+        </div>
+        <h2 class="slide-title" id="slide25Title">Aprofundamento na Coluna Cervical</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-25.png" alt="Coluna Cervical" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Detalhe Cervical</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Vértebras Típicas vs. Atípicas
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Atlas (C1):</strong> Sem corpo vertebral, apenas arco anterior e posterior</li>
+         <li><strong style="color:#cbd5e1;">Áxis (C2):</strong> Possui o processo odontoide (dente)</li>
+         <li><strong style="color:#cbd5e1;">Vértebras Típicas:</strong> C3 a C7 com forames transversos para artérias vertebrais</li>
+         <li><strong style="color:#cbd5e1;">Processos espinhosos bífidos</strong> características distintivas</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-26">
+       <div>
+        <div class="slide-number">
+         Slide 26
+        </div>
+        <h2 class="slide-title" id="slide26Title">Aprofundamento na Coluna Torácica e Articulação Costovertebral</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-26.png" alt="Coluna Torácica" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Articulação Costovertebral</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características Anatômicas
+        </div>
+        <ul class="bullet-list">
+         <li>Análise das foveas costais superiores, inferiores e transversas</li>
+         <li>Essenciais para a articulação com as costelas</li>
+         <li>Formação da caixa torácica</li>
+         <li><strong style="color:#cbd5e1;">Mecânica Respiratória:</strong> Estrutura e orientação permitem movimentos respiratórios</li>
+        </ul>
+       </div>
+      </article><article class="slide-card" id="slide-27">
+       <div>
+        <div class="slide-number">
+         Slide 27
+        </div>
+        <h2 class="slide-title" id="slide27Title">Aprofundamento na Coluna Lombar, Sacro e Pelve</h2>
+       </div>
+       <hr class="slide-divider">
+       <div class="slide-image-wrap"><img src="icon-27.png" alt="Coluna Lombar e Pelve" loading="lazy" style="max-width:100%; max-height:180px; border-radius:8px;" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Imagem indisponível';"> <span class="img-label">Base da Coluna e Pelve</span>
+       </div>
+       <div class="content-block">
+        <div class="content-block-title">
+         Características
+        </div>
+        <ul class="bullet-list">
+         <li><strong style="color:#cbd5e1;">Vértebras Lombares:</strong> Grandes e robustas, sem forames transversos ou foveas costais</li>
+         <li>Adaptadas para o suporte do peso corporal</li>
+         <li><strong style="color:#cbd5e1;">Sacro e Cóccix:</strong> Fusão, forames sacrais, articulação com a pelve</li>
+         <li><strong style="color:#cbd5e1;">Pelve:</strong> Articulação com o fêmur, suporte do peso</li>
+        </ul>
+       </div>
+      </article>
+     </div><nav class="nav-bar" aria-label="Navegação de slides">
+      <button class="nav-btn-large" id="prevBtnLarge" aria-label="Slide anterior"> <i data-lucide="chevron-left" style="width:18px;height:18px;"></i> </button>
+      <div style="display:flex; align-items:center; gap:8px; flex:1; justify-content:center;">
+       <button class="nav-btn" id="prevBtn" aria-label="Slide anterior" disabled> <i data-lucide="chevron-left" style="width:16px;height:16px;"></i> </button>
+       <div class="nav-dots" id="navDots">
+        <div class="nav-dot active" data-slide="1" role="button" aria-label="Slide 1" tabindex="0"></div>
+        <div class="nav-dot" data-slide="2" role="button" aria-label="Slide 2" tabindex="0"></div>
+        <div class="nav-dot" data-slide="3" role="button" aria-label="Slide 3" tabindex="0"></div>
+        <div class="nav-dot" data-slide="4" role="button" aria-label="Slide 4" tabindex="0"></div>
+        <div class="nav-dot" data-slide="5" role="button" aria-label="Slide 5" tabindex="0"></div>
+        <div class="nav-dot" data-slide="6" role="button" aria-label="Slide 6" tabindex="0"></div>
+        <div class="nav-dot" data-slide="7" role="button" aria-label="Slide 7" tabindex="0"></div>
+        <div class="nav-dot" data-slide="8" role="button" aria-label="Slide 8" tabindex="0"></div>
+        <div class="nav-dot" data-slide="9" role="button" aria-label="Slide 9" tabindex="0"></div>
+        <div class="nav-dot" data-slide="10" role="button" aria-label="Slide 10" tabindex="0"></div>
+        <div class="nav-dot" data-slide="11" role="button" aria-label="Slide 11" tabindex="0"></div>
+        <div class="nav-dot" data-slide="12" role="button" aria-label="Slide 12" tabindex="0"></div>
+        <div class="nav-dot" data-slide="13" role="button" aria-label="Slide 13" tabindex="0"></div>
+        <div class="nav-dot" data-slide="14" role="button" aria-label="Slide 14" tabindex="0"></div>
+        <div class="nav-dot" data-slide="15" role="button" aria-label="Slide 15" tabindex="0"></div>
+        <div class="nav-dot" data-slide="16" role="button" aria-label="Slide 16" tabindex="0"></div>
+        <div class="nav-dot" data-slide="17" role="button" aria-label="Slide 17" tabindex="0"></div>
+        <div class="nav-dot" data-slide="18" role="button" aria-label="Slide 18" tabindex="0"></div>
+        <div class="nav-dot" data-slide="19" role="button" aria-label="Slide 19" tabindex="0"></div>
+        <div class="nav-dot" data-slide="20" role="button" aria-label="Slide 20" tabindex="0"></div>
+        <div class="nav-dot" data-slide="21" role="button" aria-label="Slide 21" tabindex="0"></div>
+        <div class="nav-dot" data-slide="22" role="button" aria-label="Slide 22" tabindex="0"></div>
+        <div class="nav-dot" data-slide="23" role="button" aria-label="Slide 23" tabindex="0"></div>
+        <div class="nav-dot" data-slide="24" role="button" aria-label="Slide 24" tabindex="0"></div>
+        <div class="nav-dot" data-slide="25" role="button" aria-label="Slide 25" tabindex="0"></div>
+        <div class="nav-dot" data-slide="26" role="button" aria-label="Slide 26" tabindex="0"></div>
+        <div class="nav-dot" data-slide="27" role="button" aria-label="Slide 27" tabindex="0"></div>
+       </div><button class="nav-btn" id="nextBtn" aria-label="Próximo slide"> <i data-lucide="chevron-right" style="width:16px;height:16px;"></i> </button>
+      </div><button class="nav-btn-large" id="nextBtnLarge" aria-label="Próximo slide"> <i data-lucide="chevron-right" style="width:18px;height:18px;"></i> </button>
      </nav>
-    </div><!-- SIDEBAR -->
-    <aside class="sidebar">
+    </section><aside class="sidebar" aria-label="Lista de slides">
      <div class="sidebar-label">
-      Navegar
+      Slides
      </div>
-     <div class="thumb-scroll" id="thumb-scroll" role="list"><!-- thumb items generated by JS -->
+     <div class="thumb-item active" data-slide="1" id="thumb-1"><span class="thumb-num">01</span> <span class="thumb-text" id="thumbText1">Capa</span>
      </div>
-     <div class="sidebar-label" style="margin-top:8px;">
-      Anotações
-     </div><textarea class="notes-area" id="notes" placeholder="Escreva suas anotações sobre este slide..." aria-label="Anotações do slide"></textarea>
-     <div style="display:flex; align-items:center; justify-content:space-between;">
-      <div class="notes-saved" id="notes-saved"><i data-lucide="check" style="width:11px;height:11px;"></i> Salvo
-      </div>
-      <div class="keyboard-hint"><kbd>←</kbd><kbd>→</kbd> navegar
-      </div>
+     <div class="thumb-item" data-slide="2" id="thumb-2"><span class="thumb-num">02</span> <span class="thumb-text" id="thumbText2">Funções do Sistema Esquelético</span>
+     </div>
+     <div class="thumb-item" data-slide="3" id="thumb-3"><span class="thumb-num">03</span> <span class="thumb-text" id="thumbText3">Divisão do Esqueleto</span>
+     </div>
+     <div class="thumb-item" data-slide="4" id="thumb-4"><span class="thumb-num">04</span> <span class="thumb-text" id="thumbText4">Classificação Morfológica</span>
+     </div>
+     <div class="thumb-item" data-slide="5" id="thumb-5"><span class="thumb-num">05</span> <span class="thumb-text" id="thumbText5">Ossos Longos</span>
+     </div>
+     <div class="thumb-item" data-slide="6" id="thumb-6"><span class="thumb-num">06</span> <span class="thumb-text" id="thumbText6">Ossos Curtos</span>
+     </div>
+     <div class="thumb-item" data-slide="7" id="thumb-7"><span class="thumb-num">07</span> <span class="thumb-text" id="thumbText7">Ossos Planos</span>
+     </div>
+     <div class="thumb-item" data-slide="8" id="thumb-8"><span class="thumb-num">08</span> <span class="thumb-text" id="thumbText8">Ossos Irregulares</span>
+     </div>
+     <div class="thumb-item" data-slide="9" id="thumb-9"><span class="thumb-num">09</span> <span class="thumb-text" id="thumbText9">Ossos Sesamoides</span>
+     </div>
+     <div class="thumb-item" data-slide="10" id="thumb-10"><span class="thumb-num">10</span> <span class="thumb-text" id="thumbText10">Osso Compacto</span>
+     </div>
+     <div class="thumb-item" data-slide="11" id="thumb-11"><span class="thumb-num">11</span> <span class="thumb-text" id="thumbText11">Osso Esponjoso</span>
+     </div>
+     <div class="thumb-item" data-slide="12" id="thumb-12"><span class="thumb-num">12</span> <span class="thumb-text" id="thumbText12">Periósteo e Pericôndrio</span>
+     </div>
+     <div class="thumb-item" data-slide="13" id="thumb-13"><span class="thumb-num">13</span> <span class="thumb-text" id="thumbText13">Matriz Orgânica Óssea</span>
+     </div>
+     <div class="thumb-item" data-slide="14" id="thumb-14"><span class="thumb-num">14</span> <span class="thumb-text" id="thumbText14">Osteoblastos</span>
+     </div>
+     <div class="thumb-item" data-slide="15" id="thumb-15"><span class="thumb-num">15</span> <span class="thumb-text" id="thumbText15">Osteócitos</span>
+     </div>
+     <div class="thumb-item" data-slide="16" id="thumb-16"><span class="thumb-num">16</span> <span class="thumb-text" id="thumbText16">Osteoclastos</span>
+     </div>
+     <div class="thumb-item" data-slide="17" id="thumb-17"><span class="thumb-num">17</span> <span class="thumb-text" id="thumbText17">Origem Embrionária</span>
+     </div>
+     <div class="thumb-item" data-slide="18" id="thumb-18"><span class="thumb-num">18</span> <span class="thumb-text" id="thumbText18">Ossificação Intramembranosa 1</span>
+     </div>
+     <div class="thumb-item" data-slide="19" id="thumb-19"><span class="thumb-num">19</span> <span class="thumb-text" id="thumbText19">Ossificação Intramembranosa 2</span>
+     </div>
+     <div class="thumb-item" data-slide="20" id="thumb-20"><span class="thumb-num">20</span> <span class="thumb-text" id="thumbText20">Ossificação Intramembranosa 3-4</span>
+     </div>
+     <div class="thumb-item" data-slide="21" id="thumb-21"><span class="thumb-num">21</span> <span class="thumb-text" id="thumbText21">Ossificação Endocondral</span>
+     </div>
+     <div class="thumb-item" data-slide="22" id="thumb-22"><span class="thumb-num">22</span> <span class="thumb-text" id="thumbText22">Fratura: Reparação Óssea</span>
+     </div>
+     <div class="thumb-item" data-slide="23" id="thumb-23"><span class="thumb-num">23</span> <span class="thumb-text" id="thumbText23">Osteoporose: Patologia</span>
+     </div>
+     <div class="thumb-item" data-slide="24" id="thumb-24"><span class="thumb-num">24</span> <span class="thumb-text" id="thumbText24">Coluna Vertebral: Visão Geral</span>
+     </div>
+     <div class="thumb-item" data-slide="25" id="thumb-25"><span class="thumb-num">25</span> <span class="thumb-text" id="thumbText25">Coluna Cervical</span>
+     </div>
+     <div class="thumb-item" data-slide="26" id="thumb-26"><span class="thumb-num">26</span> <span class="thumb-text" id="thumbText26">Coluna Torácica</span>
+     </div>
+     <div class="thumb-item" data-slide="27" id="thumb-27"><span class="thumb-num">27</span> <span class="thumb-text" id="thumbText27">Coluna Lombar, Sacro e Pelve</span>
      </div>
     </aside>
-   </div>
-  </div><!-- MODAL -->
-  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+   </main>
   </div>
   <script>
-// ─── DATA ───────────────────────────────────────────────────
-const TOTAL = 30;
-let current = 1;
-
-// Anatomical topics per slide
-const slideData = [
-  { title: "Capa", desc: "Sistema Esquelético - Generalidades\nProf. Cláudia Pinheiro" },
-  { title: "Funções do Sistema Esquelético", desc: "• Sustentação corporal\n• Proteção de órgãos vitais (cérebro, coração)\n• Base mecânica para movimentos\n• Produção de células sanguíneas (hematopoiese)\n• Reserva de sais minerais (cálcio e fósforo)" },
-  { title: "Divisão do Esqueleto", desc: "Esqueleto Axial: Ossos do eixo central (crânio, coluna vertebral, costelas e esterno)\n\nEsqueleto Apendicular: Ossos dos membros superiores e inferiores, além das cinturas escapular e pélvica" },
-  { title: "Classificação Morfológica dos Ossos", desc: "Visão geral dos tipos de ossos baseada em suas dimensões e formas:\n• Longos\n• Curtos\n• Planos\n• Irregulares\n• Sesamoides" },
-  { title: "Ossos Longos", desc: "Comprimento maior que largura e espessura\n\nEstrutura:\n• Diáfise (corpo central)\n• Epífises (extremidades)\n\nExemplos: Fêmur, Úmero\n\nFunção: Locomoção e suporte de peso" },
-  { title: "Ossos Curtos", desc: "Dimensões equivalentes (comprimento, largura e espessura)\n\nLocalização: Áreas de pouco movimento mas grande resistência\n\nExemplos: Ossos do Carpo (pulso), Tarso (tornozelo)\n\nFunção: Estabilidade e absorção de impacto" },
-  { title: "Ossos Planos ou Laminares", desc: "Comprimento e largura predominam sobre a espessura\n\nCaracterísticas:\n• Oferecem proteção\n• Grande área para inserção muscular\n\nExemplos: Escápula, ossos do topo do crânio, costelas\n\nFunção: Proteção de órgãos internos e ancoragem muscular" },
-  { title: "Ossos Irregulares", desc: "Formas complexas que não se encaixam em outras categorias\n\nExemplos: Vértebras, ossos da face\n\nCaracterísticas:\n• Morfologia variável\n• Funções múltiplas (suporte, proteção, passagem de estruturas)" },
-  { title: "Ossos Sesamoides", desc: "Desenvolvem-se dentro de tendões\n\nPrincipal exemplo: Patela (joelho)\n\nCaracterísticas:\n• Forma arredondada\n• Envolvidos em tendões\n• Aumentam a alavanca mecânica\n\nOutros exemplos: Sesamoides do pé" },
-  { title: "Substância Óssea: Osso Compacto", desc: "Camada externa dura do osso\n\nCaracterísticas:\n• Aparência sólida e densa\n• Resistência mecânica elevada\n• Composta por osteons (unidades estruturais)\n\nLocalização: Camada superficial de todos os ossos" },
-  { title: "Substância Óssea: Osso Esponjoso", desc: "Rede interna de trabéculas ósseas\n\nCaracterísticas:\n• Estrutura porosa e reticulada\n• Espaços preenchidos por medula óssea\n• Distribuição de força ao longo do osso\n\nLocalização: Núcleo de ossos longos e ossos curtos/planos\n\nFunção: Leveza com resistência" },
-  { title: "Periósteo e Pericôndrio", desc: "Periósteo:\n• Membrana de tecido conjuntivo que reveste o osso\n• Ausente nas superfícies articulares\n• Fundamental para nutrição e reparação\n\nPericôndrio:\n• Revestimento de tecido conjuntivo da cartilagem\n• Fornece nutrição ao tecido cartilaginoso" },
-  { title: "Matriz Orgânica Óssea", desc: "Composição:\n• 90% fibras de colágeno tipo I\n• Proteoglicanos e glicoproteínas\n\nFunções:\n• Resistência e flexibilidade\n• Ancoragem de minerais\n\nMinerais depositados:\n• Cálcio e fósforo (hidroxiapatita)\n• Conferem rigidez e resistência à compressão" },
-  { title: "Células Ósseas: Osteoblastos", desc: "Osteoblastos:\n• Células formadoras de osso\n• Sintetizam a matriz orgânica (colágeno)\n• Secretam substâncias que promovem mineralização\n• Presentes na superfície óssea durante formação\n• Podem se diferenciar em osteócitos" },
-  { title: "Células Ósseas: Osteócitos", desc: "Osteócitos:\n• Osteoblastos aprisionados na matriz\n• Mantêm a vitalidade do tecido ósseo\n• Residem em pequenas lacunas (espaços vazios)\n• Comunicam-se através de canalículos\n• Participam na homeostase mineral" },
-  { title: "Células Ósseas: Osteoclastos", desc: "Osteoclastos:\n• Células reabsortivas (fagocitárias)\n• Removem osso antigo e danificado\n• Derivadas de células hematopoiéticas\n• Essenciais para remodelação óssea\n• Atuam em 'lacunas de reabsorção'" },
-  { title: "Origem Embrionária", desc: "Todo o sistema esquelético deriva do mesênquima\n\nMesênquima:\n• Tecido conjuntivo embrionário\n• Fonte de células precursoras de osso e cartilagem\n\nDois principais tipos de ossificação:\n1. Intramembranosa\n2. Endocondral" },
-  { title: "Ossificação Intramembranosa - Fase 1", desc: "Ocorre dentro de membranas de tecido conjuntivo\n\nTípica dos: Ossos do crânio, mandíbula\n\nFase 1 - Centro de Ossificação:\n• Células mesenquimais se diferenciam em osteoblastos\n• Começam a secretar o osteoide (pré-osso)\n• Formação de ilhas de osso" },
-  { title: "Ossificação Intramembranosa - Fase 2", desc: "Fase 2 - Calcificação:\n• Deposição de cálcio e sais minerais no osteoide\n• Osteoblastos tornam-se osteócitos ao serem aprisionados\n• Formação de matriz mineralizada\n• Endurecimento progressivo do tecido" },
-  { title: "Ossificação Intramembranosa - Fase 3 e 4", desc: "Fase 3 - Formação de Trabéculas:\n• Matriz se organiza em trabéculas\n• Forma-se osso esponjoso\n• Vasos sanguíneos penetram o tecido\n• Primeiros hematopoiese (formação de sangue)\n\nFase 4 - Desenvolvimento do Periósteo:\n• Mesênquima periférico condensa-se\n• Forma-se o periósteo\n• Fina camada de osso compacto se desenvolve" },
-  { title: "Ossificação Endocondral", desc: "O osso substitui um modelo prévio de cartilagem hialina\n\nProcesso de crescimento da maioria dos ossos do corpo\n\nFases principais:\n• Formação do molde de cartilagem\n• Hipertrofia de condrócitos\n• Calcificação da cartilagem\n• Invasão de vasos e células ósseas\n• Deposição de osso" },
-  { title: "Fratura: Ossificação e Reparação", desc: "Processo de cura em 4 fases:\n\n1. Formação do Hematoma: Coágulo de sangue na área\n2. Calo Fibrocartilaginoso: Tecido conectivo e cartilagem\n3. Calo Ósseo: Deposição de osso novo\n4. Remodelação Final: Reabsorção e remodelação do osso" },
-  { title: "Osteoporose: Patologia Óssea", desc: "Condição clínica onde a reabsorção > formação\n\nMecanismo:\n• Osteoclastos (reabsorção) superam osteoblastos (formação)\n• Trabéculas ficam finas e fragmentadas\n• Osso compacto diminui em espessura\n\nResultado:\n• Osso quebradiço e frágil\n• Maior risco de fraturas\n• Afeta principalmente mulheres pós-menopausa" },
-  { title: "Síntese: Sistema Esquelético", desc: "O sistema esquelético é uma estrutura viva e dinâmica:\n\n• Proporciona suporte, proteção e movimento\n• Composto por osso compacto e esponjoso\n• Formado por ossificação intramembranosa e endocondral\n• Constantemente remodelado por osteoblastos e osteoclastos\n• Vulnerável a doenças como osteoporose\n• Fundamental para a homeostase do cálcio" },
-];
-
-// ─── GET IMAGE PATH ──────────────────────────────────────────
-function getImagePath(slideIndex) {
-  return `icon-${slideIndex}.png`;
-}
-
-// ─── BUILD SLIDES ────────────────────────────────────────────
-function buildSlides() {
-  const viewport = document.getElementById('slide-viewport');
-  const thumbScroll = document.getElementById('thumb-scroll');
-
-  for (let i = 1; i <= TOTAL; i++) {
-    const data = slideData[i - 1];
-    const card = document.createElement('div');
-    card.className = 'slide-card';
-    card.id = `slide-${i}`;
-    const imgPath = getImagePath(i);
-
-    card.innerHTML = `
-      <div class="slide-number">Slide ${String(i).padStart(2,'0')} / ${TOTAL}</div>
-      <h2 class="slide-title">${data.title}</h2>
-      <div class="slide-image-wrap" onclick="openModal(${i})" role="button" aria-label="Ampliar ilustração do slide ${i}" tabindex="0">
-        <img src="${imgPath}" alt="Slide ${i}" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e2a3a'; this.alt='Ilustração indisponível';" style="max-width:100%; max-height:200px; border-radius:8px;">
-        <span class="zoom-hint">
-          <i data-lucide="zoom-in" style="width:10px;height:10px;"></i>
-          ampliar
-        </span>
-      </div>
-      <p class="slide-caption">${data.desc}</p>
-    `;
-
-    viewport.appendChild(card);
-
-    // Thumbnail
-    const thumb = document.createElement('div');
-    thumb.className = 'thumb-item';
-    thumb.id = `thumb-${i}`;
-    thumb.setAttribute('role', 'listitem');
-    thumb.setAttribute('tabindex', '0');
-    thumb.setAttribute('aria-label', `Ir para slide ${i}`);
-    thumb.innerHTML = `<span class="thumb-dot"></span><span>${i}</span>`;
-    thumb.onclick = () => { save(); goTo(i); };
-    thumb.onkeydown = (e) => { if (e.key === 'Enter') { save(); goTo(i); } };
-    thumbScroll.appendChild(thumb);
-  }
-}
-
-// ─── NAVIGATION ─────────────────────────────────────────────
-function show(n) {
-  document.querySelectorAll('.slide-card').forEach(s => s.classList.remove('active'));
-  document.getElementById(`slide-${n}`).classList.add('active');
-  document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active-thumb'));
-  document.getElementById(`thumb-${n}`).classList.add('active-thumb');
-
-  // Scroll thumb into view
-  const thumbEl = document.getElementById(`thumb-${n}`);
-  thumbEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-
-  // Notes
-  document.getElementById('notes').value = localStorage.getItem(`note-${n}`) || '';
-
-  // Progress
-  const pct = (n / TOTAL * 100).toFixed(2);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  const pb = document.querySelector('.progress-track');
-  pb.setAttribute('aria-valuenow', n);
-
-  // Counter
-  document.getElementById('slide-counter').textContent = `Slide ${n} / ${TOTAL}`;
-
-  // Buttons
-  document.getElementById('btn-prev').disabled = (n === 1);
-  document.getElementById('btn-next').disabled = (n === TOTAL);
-
-  current = n;
-  lucide.createIcons();
-}
-
-function goTo(n) { show(n); }
-
-function next() { if (current < TOTAL) { save(); show(current + 1); } }
-function prev() { if (current > 1)    { save(); show(current - 1); } }
-
-// ─── NOTES ──────────────────────────────────────────────────
-let saveTimer;
-function save() {
-  localStorage.setItem(`note-${current}`, document.getElementById('notes').value);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  buildSlides();
-  show(1);
-
-  const notesEl = document.getElementById('notes');
-  const savedEl = document.getElementById('notes-saved');
-
-  notesEl.addEventListener('input', () => {
-    save();
-    savedEl.classList.add('visible');
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => savedEl.classList.remove('visible'), 1800);
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.target === notesEl) return;
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft')  prev();
-    if (e.key === 'Escape')     closeModal();
-  });
-
-  // Voice commands
-  initVoiceCommands();
-
-  lucide.createIcons();
-});
-
-// ─── VOICE COMMANDS ─────────────────────────────────────────
-function initVoiceCommands() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  
-  if (!SpeechRecognition) {
-    console.warn('Speech Recognition API não suportado neste navegador');
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-  recognition.lang = 'pt-BR';
-  recognition.continuous = true;
-  recognition.interimResults = false;
-
+  const TOTAL = 27; // Ajustado para fechar perfeitamente com as imagens e textos criados
+  let current = 1;
   let isListening = false;
+  let isSpeaking = false;
+  let allNotes = [];
+  const synth = window.speechSynthesis;
+  
+  // Melhoria na compatibilidade de voz para abranger mais navegadores
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = SpeechRec ? new SpeechRec() : null;
 
-  // Voice command listener
-  recognition.onresult = (event) => {
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      if (event.results[i].isFinal) {
-        const transcript = event.results[i][0].transcript.toLowerCase().trim();
-        handleVoiceCommand(transcript);
+  // Initialize Data SDK for notes persistence
+  let currentRecordCount = 0;
+
+  const dataHandler = {
+    onDataChanged(data) {
+      allNotes = data;
+      currentRecordCount = data.length;
+      renderNotesList();
+    }
+  };
+
+  async function initDataSDK() {
+    if (window.dataSdk && window.dataSdk.init) {
+      const result = await window.dataSdk.init(dataHandler);
+      if (!result.isOk) console.error('Failed to init Data SDK');
+    } else {
+      // Plano B: Se o SDK falhar, ele salva no navegador do aluno
+      const local = localStorage.getItem('anatomy_notes');
+      if (local) {
+        allNotes = JSON.parse(local);
+        dataHandler.onDataChanged(allNotes);
       }
     }
-  };
+  }
 
-  recognition.onerror = (event) => {
-    if (event.error !== 'no-speech') {
-      console.warn('Erro no reconhecimento de voz:', event.error);
+  // VOICE RECOGNITION SETUP
+  if (recognition) {
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      isListening = true;
+      document.getElementById('voiceStatus').style.display = 'flex';
+      document.getElementById('voiceCmdBtn').classList.add('active');
+      lucide.createIcons();
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      handleVoiceCommand(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      isListening = false;
+      document.getElementById('voiceStatus').style.display = 'none';
+      document.getElementById('voiceCmdBtn').classList.remove('active');
+    };
+
+    recognition.onend = () => {
+      isListening = false;
+      document.getElementById('voiceStatus').style.display = 'none';
+      document.getElementById('voiceCmdBtn').classList.remove('active');
+    };
+  }
+
+  function handleVoiceCommand(command) {
+    if (command.includes('próximo') || command.includes('avancar') || command.includes('avança')) {
+      goToSlide(current + 1);
+      showToast('Próximo slide');
+    } else if (command.includes('anterior') || command.includes('voltar')) {
+      goToSlide(current - 1);
+      showToast('Slide anterior');
+    } else if (command.includes('ler') || command.includes('leia') || command.includes('ouvir')) {
+      readSlide();
+      showToast('Lendo slide');
+    } else if (command.includes('parar') || command.includes('silêncio')) {
+      stopSpeech();
+      showToast('Leitura pausada');
     }
-  };
+  }
 
-  // Toggle voice button
-  const voiceBtn = document.querySelector('.voice-btn');
-  if (voiceBtn) {
-    voiceBtn.addEventListener('click', () => {
-      if (!isListening) {
-        recognition.start();
-        isListening = true;
-        voiceBtn.classList.add('listening');
-        voiceBtn.setAttribute('aria-pressed', 'true');
+  function startVoiceCommand() {
+    if (!recognition) {
+      showToast('Reconhecimento de voz não suportado neste navegador');
+      return;
+    }
+    if (isListening) {
+      recognition.abort();
+      isListening = false;
+      document.getElementById('voiceStatus').style.display = 'none';
+      document.getElementById('voiceCmdBtn').classList.remove('active');
+    } else {
+      recognition.start();
+    }
+  }
+
+  function readSlide() {
+    stopSpeech();
+    const slideTitle = document.getElementById(`slide${current}Title`)?.textContent || '';
+    
+    // Captura o texto do slide, retirando formatações visuais desnecessárias
+    const slideCard = document.getElementById(`slide-${current}`);
+    const bulletList = slideCard.querySelector('.bullet-list');
+    let contentToRead = slideCard.querySelector('p')?.textContent || '';
+    
+    if (bulletList) {
+      contentToRead = Array.from(bulletList.querySelectorAll('li')).map(li => li.textContent).join('. ');
+    }
+
+    const textToRead = slideTitle + '. ' + contentToRead;
+    
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    utterance.onstart = () => {
+      isSpeaking = true;
+      document.getElementById('readSlideBtn').style.display = 'none';
+      document.getElementById('stopVoiceBtn').style.display = 'flex';
+    };
+
+    utterance.onend = () => {
+      isSpeaking = false;
+      document.getElementById('readSlideBtn').style.display = 'flex';
+      document.getElementById('stopVoiceBtn').style.display = 'none';
+    };
+
+    synth.speak(utterance);
+  }
+
+  function stopSpeech() {
+    synth.cancel();
+    isSpeaking = false;
+    document.getElementById('readSlideBtn').style.display = 'flex';
+    document.getElementById('stopVoiceBtn').style.display = 'none';
+  }
+
+  // NOTES & DATA MANAGEMENT
+  async function saveNote() {
+    const textarea = document.getElementById('notesTextarea');
+    const noteText = textarea.value.trim();
+
+    if (!noteText) {
+      showToast('Adicione uma anotação primeiro');
+      return;
+    }
+
+    if (currentRecordCount >= 999) {
+      showToast('Limite de anotações atingido (999)');
+      return;
+    }
+
+    const note = {
+      slide_number: current,
+      title: document.getElementById(`slide${current}Title`)?.textContent || 'Slide ' + current,
+      content: noteText,
+      notes: noteText,
+      timestamp: new Date().toISOString()
+    };
+
+    if (window.dataSdk && window.dataSdk.create) {
+      const result = await window.dataSdk.create(note);
+      if (result.isOk) {
+        textarea.value = '';
+        showToast('Anotação salva com sucesso!');
       } else {
-        recognition.stop();
-        isListening = false;
-        voiceBtn.classList.remove('listening');
-        voiceBtn.setAttribute('aria-pressed', 'false');
+        showToast('Erro ao salvar anotação');
       }
+    } else {
+      // Plano B
+      note.__backendId = Date.now().toString();
+      allNotes.push(note);
+      localStorage.setItem('anatomy_notes', JSON.stringify(allNotes));
+      textarea.value = '';
+      showToast('Anotação salva localmente!');
+      renderNotesList();
+    }
+  }
+
+  function extractSlideInfo() {
+    const slideCard = document.getElementById(`slide-${current}`);
+    const title = document.getElementById(`slide${current}Title`)?.textContent || '';
+    const bulletsList = slideCard.querySelector('.bullet-list');
+    let info = title + '\n\n';
+
+    if (bulletsList) {
+      const bullets = bulletsList.querySelectorAll('li');
+      bullets.forEach(bullet => {
+        info += '• ' + bullet.textContent.trim() + '\n';
+      });
+    } else {
+      info += slideCard.querySelector('p')?.textContent.trim() || '';
+    }
+
+    const textarea = document.getElementById('notesTextarea');
+    textarea.value = info;
+    showToast('Informações extraídas para a área de edição!');
+  }
+
+  function renderNotesList() {
+    const list = document.getElementById('notesList');
+    list.innerHTML = '';
+    
+    const slideNotes = allNotes.filter(n => n.slide_number === current);
+    slideNotes.forEach(note => {
+      const item = document.createElement('div');
+      item.className = 'note-item';
+      item.innerHTML = `
+        <span>${note.notes.substring(0, 80)}${note.notes.length > 80 ? '...' : ''}</span>
+        <span class="note-delete" data-id="${note.__backendId}">✕</span>
+      `;
+      item.querySelector('.note-delete').addEventListener('click', async () => {
+        if (window.dataSdk && window.dataSdk.delete) {
+          const result = await window.dataSdk.delete(note);
+          if (result.isOk) showToast('Anotação removida');
+        } else {
+          // Plano B
+          allNotes = allNotes.filter(n => n.__backendId !== note.__backendId);
+          localStorage.setItem('anatomy_notes', JSON.stringify(allNotes));
+          renderNotesList();
+          showToast('Anotação removida localmente');
+        }
+      });
+      list.appendChild(item);
     });
   }
 
-  recognition.onend = () => {
-    isListening = false;
-    const voiceBtn = document.querySelector('.voice-btn');
-    if (voiceBtn) {
-      voiceBtn.classList.remove('listening');
-      voiceBtn.setAttribute('aria-pressed', 'false');
+  async function exportNotes() {
+    if (allNotes.length === 0) {
+      showToast('Nenhuma anotação para exportar');
+      return;
     }
-  };
-}
 
-function handleVoiceCommand(command) {
-  // Normalize command
-  command = command.replace(/[,.:!?]/g, '').toLowerCase();
+    let csvContent = 'Slide,Título,Anotações,Data\n';
+    allNotes.forEach(note => {
+      const date = new Date(note.timestamp).toLocaleString('pt-BR');
+      const escaped = note.notes.replace(/"/g, '""');
+      csvContent += `${note.slide_number},"${note.title}","${escaped}","${date}"\n`;
+    });
 
-  // Navigation commands
-  if (command.includes('próximo') || command.includes('próxima')) {
-    next();
-  } else if (command.includes('anterior') || command.includes('voltar') || command.includes('atrás')) {
-    prev();
-  } else if (command.includes('primeiro') || command.includes('inicial')) {
-    save();
-    goTo(1);
-  } else if (command.includes('último') || command.includes('final')) {
-    save();
-    goTo(TOTAL);
-  } else if (command.match(/(?:ir para|vá para|slide|ir)\s+(\d+)/)) {
-    const match = command.match(/(\d+)/);
-    if (match) {
-      const slideNum = parseInt(match[1]);
-      if (slideNum >= 1 && slideNum <= TOTAL) {
-        save();
-        goTo(slideNum);
-      }
-    }
-  } else if (command.includes('fechar') || command.includes('sair')) {
-    closeModal();
-  } else if (command.includes('pdf') || command.includes('exportar')) {
-    exportPDF();
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'anotacoes-sistema-esqueletico.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Anotações exportadas!');
   }
-}
 
-// ─── MODAL ──────────────────────────────────────────────────
-function openModal(slideIdx) {
-  const modal = document.getElementById('modal');
-  const imgPath = getImagePath(slideIdx);
-  
-  // Create img element for modal
-  const img = document.createElement('img');
-  img.src = imgPath;
-  img.alt = `Slide ${slideIdx}`;
-  img.className = 'modal-content';
-  img.style.maxWidth = '80vw';
-  img.style.maxHeight = '80vh';
-  img.style.borderRadius = '12px';
-  img.onerror = function() {
-    console.error('Image failed to load:', this.src);
-    this.style.background = '#1e2a3a';
-    this.style.display = 'flex';
-    this.style.alignItems = 'center';
-    this.style.justifyContent = 'center';
-    this.style.color = '#94a3b8';
-  };
-  
-  modal.innerHTML = '';
-  modal.appendChild(img);
-  modal.classList.add('open');
-  modal.onclick = closeModal;
-}
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
 
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-}
-
-// ─── PDF ────────────────────────────────────────────────────
-function exportPDF() {
-  const btn = document.querySelector('.pdf-btn');
-  btn.innerHTML = '<i data-lucide="loader" style="width:14px;height:14px;"></i> Gerando...';
-  btn.disabled = true;
-  lucide.createIcons();
-
-  // Build a print-friendly document
-  const printWin = window.open('', '_blank');
-  if (!printWin) {
-    btn.innerHTML = '<i data-lucide="file-down" style="width:14px;height:14px;"></i> PDF';
-    btn.disabled = false;
+  function goToSlide(n) {
+    if (n < 1 || n > TOTAL) return;
+    stopSpeech();
+    document.getElementById('slide-' + current).classList.remove('active');
+    document.getElementById('thumb-' + current).classList.remove('active');
+    document.querySelectorAll('.nav-dot')[current - 1].classList.remove('active');
+    
+    current = n;
+    
+    document.getElementById('slide-' + current).classList.add('active');
+    document.getElementById('thumb-' + current).classList.add('active');
+    document.querySelectorAll('.nav-dot')[current - 1].classList.add('active');
+    document.getElementById('slideBadge').textContent = 'Slide ' + current + ' de ' + TOTAL;
+    document.getElementById('prevBtn').disabled = current === 1;
+    document.getElementById('nextBtn').disabled = current === TOTAL;
+    document.getElementById('prevBtnLarge').disabled = current === 1;
+    document.getElementById('nextBtnLarge').disabled = current === TOTAL;
+    
+    // Rolagem automática da barra lateral para acompanhar o slide ativo
+    const thumbEl = document.getElementById('thumb-' + current);
+    thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    renderNotesList();
     lucide.createIcons();
-    return;
   }
 
-  let html = `<!DOCTYPE html><html><head>
-    <meta charset="UTF-8">
-    <title>Sistema Esquelético</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-      body { font-family: 'DM Sans',sans-serif; margin:0; padding:0; background:#fff; color:#1a202c; }
-      .page { page-break-after: always; padding: 32px 40px; border-bottom: 1px solid #e2e8f0; }
-      h2 { font-family: 'Playfair Display', serif; color: #1e40af; margin:0 0 4px; font-size: 18px; }
-      .num { font-size:11px; color:#94a3b8; font-weight:600; letter-spacing:1px; }
-      p { color: #475569; font-size:13px; line-height:1.6; margin-top:8px; }
-      .note { margin-top:12px; padding:10px; background:#f8fafc; border-left:3px solid #3b82f6; font-size:12px; color:#334155; border-radius:4px; }
-      .note-label { font-size:10px; font-weight:600; color:#94a3b8; margin-bottom:4px; }
-    </style>
-  </head><body>`;
+  document.getElementById('prevBtn').addEventListener('click', (e) => { e.preventDefault(); goToSlide(current - 1); });
+  document.getElementById('nextBtn').addEventListener('click', (e) => { e.preventDefault(); goToSlide(current + 1); });
+  document.getElementById('prevBtnLarge').addEventListener('click', (e) => { e.preventDefault(); goToSlide(current - 1); });
+  document.getElementById('nextBtnLarge').addEventListener('click', (e) => { e.preventDefault(); goToSlide(current + 1); });
+  document.getElementById('voiceCmdBtn').addEventListener('click', startVoiceCommand);
+  document.getElementById('readSlideBtn').addEventListener('click', readSlide);
+  document.getElementById('stopVoiceBtn').addEventListener('click', stopSpeech);
+  document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
+  document.getElementById('extractInfoBtn').addEventListener('click', extractSlideInfo);
+  document.getElementById('exportNotesBtn').addEventListener('click', exportNotes);
 
-  for (let i = 1; i <= TOTAL; i++) {
-    const d = slideData[i - 1];
-    const note = localStorage.getItem(`note-${i}`) || '';
-    html += `<div class="page">
-      <div class="num">SLIDE ${String(i).padStart(2,'0')} / ${TOTAL}</div>
-      <p>${d.desc}</p>
-      ${note ? `<div class="note"><div class="note-label">ANOTAÇÕES</div>${note}</div>` : ''}
-    </div>`;
+  document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.slide)));
+    dot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') goToSlide(parseInt(dot.dataset.slide)); });
+  });
+
+  document.querySelectorAll('.thumb-item').forEach(item => {
+    item.addEventListener('click', () => goToSlide(parseInt(item.dataset.slide)));
+  });
+
+  document.addEventListener('keydown', e => {
+    // Ignora atalhos de navegação se o usuário estiver digitando anotações
+    if(e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToSlide(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goToSlide(current - 1);
+  });
+
+  const defaultConfig = {
+    app_title:    'Sistema Esquelético',
+    app_subtitle: 'Anatomia Humana',
+    professor:    'Prof. Cláudia Pinheiro'
+  };
+
+  function applyConfig(config) {
+    const setTxt = (id, val, fallback) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val || fallback;
+    };
+    setTxt('headerTitle', config.app_title, defaultConfig.app_title);
+    setTxt('headerSubtitle', config.app_subtitle, defaultConfig.app_subtitle);
   }
 
-  html += `</body></html>`;
-  printWin.document.write(html);
-  printWin.document.close();
-  setTimeout(() => { printWin.print(); }, 600);
+  window.elementSdk && window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => { applyConfig(config); },
+    mapToCapabilities: (config) => ({
+      recolorables: [],
+      borderables: [],
+      fontEditable: undefined,
+      fontSizeable: undefined
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['presentation_title', config.app_title || defaultConfig.app_title],
+      ['subtitle', config.app_subtitle || defaultConfig.app_subtitle],
+      ['professor', config.professor || defaultConfig.professor]
+    ])
+  });
 
-  btn.innerHTML = '<i data-lucide="file-down" style="width:14px;height:14px;"></i> PDF';
-  btn.disabled = false;
+  // Initialize on load
+  initDataSDK();
   lucide.createIcons();
-}
-
-// ─── ELEMENT SDK ─────────────────────────────────────────────
-const defaultConfig = {
-  presentation_title: 'Sistema Esquelético',
-  subtitle: 'Anatomia Humana',
-  background_color: '#0a0c10',
-  accent_color: '#38bdf8',
-  text_color: '#f0f6ff',
-  font_family: 'DM Sans',
-  font_size: 14,
-};
-
-window.elementSdk && window.elementSdk.init({
-  defaultConfig,
-  onConfigChange: async (config) => {
-    const titleEl = document.getElementById('header-title');
-    const subEl   = document.getElementById('header-subtitle');
-    if (titleEl) {
-      titleEl.textContent = config.presentation_title || defaultConfig.presentation_title;
-      titleEl.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Playfair Display', serif`;
-      titleEl.style.fontSize   = `${(config.font_size || defaultConfig.font_size) * 1.3}px`;
-      titleEl.style.color      = config.text_color || defaultConfig.text_color;
-    }
-    if (subEl) {
-      subEl.textContent = config.subtitle || defaultConfig.subtitle;
-    }
-    document.body.style.background = config.background_color || defaultConfig.background_color;
-    document.querySelectorAll('.slide-badge, .slide-number').forEach(el => {
-      el.style.color = config.accent_color || defaultConfig.accent_color;
-    });
-    document.querySelectorAll('.progress-fill').forEach(el => {
-      el.style.background = `linear-gradient(90deg, ${config.accent_color || defaultConfig.accent_color}, #818cf8)`;
-    });
-    document.querySelectorAll('.slide-title').forEach(el => {
-      el.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Playfair Display', serif`;
-      el.style.fontSize   = `${(config.font_size || defaultConfig.font_size) * 1.7}px`;
-    });
-  },
-  mapToCapabilities: (config) => ({
-    recolorables: [
-      { get: () => config.background_color || defaultConfig.background_color,
-        set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-      { get: () => config.accent_color || defaultConfig.accent_color,
-        set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
-      { get: () => config.text_color || defaultConfig.text_color,
-        set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-    ],
-    borderables: [],
-    fontEditable: {
-      get: () => config.font_family || defaultConfig.font_family,
-      set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
-    },
-    fontSizeable: {
-      get: () => config.font_size || defaultConfig.font_size,
-      set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
-    },
-  }),
-  mapToEditPanelValues: (config) => new Map([
-    ['presentation_title', config.presentation_title || defaultConfig.presentation_title],
-    ['subtitle', config.subtitle || defaultConfig.subtitle],
-  ]),
-});
-</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e47230c650202fc',t:'MTc3NDg3Mzk0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  </script>
+ </body>
 </html>
