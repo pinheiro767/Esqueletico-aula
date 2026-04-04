@@ -12,7 +12,7 @@
 
   <link rel="manifest" href="./manifest.json" />
   <link rel="icon" href="./icon-1.png" type="image/png" />
-<link rel="apple-touch-icon" href="./icon-1.png" />
+  <link rel="apple-touch-icon" href="./icon-1.png" />
 
   <style>
     :root{
@@ -1340,7 +1340,7 @@
       <div class="badge">Slide ${slide.id}</div>
       <h2>${slide.title}</h2>
       <p><strong>${slide.subtitle}</strong></p>
-      <img src="${location.origin + location.pathname.replace(/\\/[^/]*$/, '/') + slide.image}" onerror="this.style.display='none'">
+      <img src="${location.origin + location.pathname.replace(/\/[^/]*$/, '/') + slide.image}" onerror="this.style.display='none'">
       <ul>${slide.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
       <div class="footer">Gerado pelo aplicativo Sistema Esquelético</div>
     </section>
