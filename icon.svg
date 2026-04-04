@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="bone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <circle cx="120" cy="160" r="54" fill="url(#bone)"/>
+  <circle cx="168" cy="128" r="42" fill="url(#bone)"/>
+  <circle cx="344" cy="384" r="54" fill="url(#bone)"/>
+  <circle cx="392" cy="352" r="42" fill="url(#bone)"/>
+  <circle cx="392" cy="160" r="54" fill="url(#bone)"/>
+  <circle cx="344" cy="128" r="42" fill="url(#bone)"/>
+  <circle cx="168" cy="384" r="54" fill="url(#bone)"/>
+  <circle cx="120" cy="352" r="42" fill="url(#bone)"/>
+
+  <rect x="140" y="218" width="232" height="76" rx="38"
+        transform="rotate(-45 256 256)"
+        fill="url(#bone)"/>
+</svg>
